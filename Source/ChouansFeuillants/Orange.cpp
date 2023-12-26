@@ -78,6 +78,7 @@ void AOrange::Jump()
 	{
 		const FVector Impulse = FVector(0.f, 0.f, JumpImpulse);
 		Ball->AddImpulse(Impulse);
+		SoundQueue();
 		bCanJump = false;
 	}
 }
@@ -86,6 +87,11 @@ void AOrange::NotifyHit(class UPrimitiveComponent* MyComp, class AActor* Other, 
 {
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
 
+	if (!bCanJump)
+	{
+		HeadingSoundQueue();
+	}
+	
 	bCanJump = true;
 }
 
@@ -110,4 +116,22 @@ void AOrange::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 	}
 }
 
+void AOrange::SoundQueue_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Blue, TEXT("Jump"));
+}
 
+void AOrange::DeadSoundQueue_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Blue, TEXT("Die"));
+}
+
+void AOrange::SaveSoundQueue_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Blue, TEXT("Save"));
+}
+
+void AOrange::HeadingSoundQueue_Implementation()
+{
+	GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Blue, TEXT("Heading"));
+}

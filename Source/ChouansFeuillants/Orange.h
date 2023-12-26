@@ -62,6 +62,22 @@ protected:
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
 
+	UFUNCTION(BlueprintNativeEvent)
+	void SoundQueue();
+	virtual void SoundQueue_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void DeadSoundQueue();
+	virtual void DeadSoundQueue_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void SaveSoundQueue();
+	virtual void SaveSoundQueue_Implementation();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void HeadingSoundQueue();
+	virtual void HeadingSoundQueue_Implementation();
+
 public:
 	/** Returns Ball subobject **/
 	FORCEINLINE class UStaticMeshComponent* GetBall() const { return Ball; }
